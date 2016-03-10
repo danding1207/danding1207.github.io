@@ -57,23 +57,17 @@
 
 
 
-<meta name="description" content="前言以前项目的一个需求，要求填写城市，但让用户自己填写容易出错，所以用选择的方式。本来一个Spinner控件就行了，但是事情永远不会和想的那样简单。经理看了ios的设计后觉得不错让我也用类似的设计，可是ios本来就有PickView控件，但是Android没有，得自定义。一开始想过用已有控件实现，比如listView或ScrollView，但是效果都不好。最后只能选择绘制了。
-
-一，首先实现Scr">
+<meta name="description" content="前言以前项目的一个需求，要求填写城市，但让用户自己填写容易出错，所以用选择的方式。本来一个Spinner控件就行了，但是事情永远不会和想的那样简单。经理看了ios的设计后觉得不错让我也用类似的设计，可是ios本来就有PickView控件，但是Android没有，得自定义。一开始想过用已有控件实现，比如listView或ScrollView，但是效果都不好。最后只能选择绘制了。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="自定义城市选择控件CitysPickView+使用Rxjava改进">
 <meta property="og:url" content="http://yoursite.com/2016/03/10/自定义城市选择控件CitysPickView/index.html">
 <meta property="og:site_name" content="MSC">
-<meta property="og:description" content="前言以前项目的一个需求，要求填写城市，但让用户自己填写容易出错，所以用选择的方式。本来一个Spinner控件就行了，但是事情永远不会和想的那样简单。经理看了ios的设计后觉得不错让我也用类似的设计，可是ios本来就有PickView控件，但是Android没有，得自定义。一开始想过用已有控件实现，比如listView或ScrollView，但是效果都不好。最后只能选择绘制了。
-
-一，首先实现Scr">
+<meta property="og:description" content="前言以前项目的一个需求，要求填写城市，但让用户自己填写容易出错，所以用选择的方式。本来一个Spinner控件就行了，但是事情永远不会和想的那样简单。经理看了ios的设计后觉得不错让我也用类似的设计，可是ios本来就有PickView控件，但是Android没有，得自定义。一开始想过用已有控件实现，比如listView或ScrollView，但是效果都不好。最后只能选择绘制了。">
 <meta property="og:image" content="http://yoursite.com/images/1.jpg">
-<meta property="og:updated_time" content="2016-03-10T07:48:19.085Z">
+<meta property="og:updated_time" content="2016-03-10T08:00:38.468Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="自定义城市选择控件CitysPickView+使用Rxjava改进">
-<meta name="twitter:description" content="前言以前项目的一个需求，要求填写城市，但让用户自己填写容易出错，所以用选择的方式。本来一个Spinner控件就行了，但是事情永远不会和想的那样简单。经理看了ios的设计后觉得不错让我也用类似的设计，可是ios本来就有PickView控件，但是Android没有，得自定义。一开始想过用已有控件实现，比如listView或ScrollView，但是效果都不好。最后只能选择绘制了。
-
-一，首先实现Scr">
+<meta name="twitter:description" content="前言以前项目的一个需求，要求填写城市，但让用户自己填写容易出错，所以用选择的方式。本来一个Spinner控件就行了，但是事情永远不会和想的那样简单。经理看了ios的设计后觉得不错让我也用类似的设计，可是ios本来就有PickView控件，但是Android没有，得自定义。一开始想过用已有控件实现，比如listView或ScrollView，但是效果都不好。最后只能选择绘制了。">
 <meta name="twitter:image" content="http://yoursite.com/images/1.jpg">
 
 
@@ -260,7 +254,7 @@
 
       
         <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a><strong>前言</strong></h2><p>以前项目的一个需求，要求填写城市，但让用户自己填写容易出错，所以用选择的方式。本来一个Spinner控件就行了，但是事情永远不会和想的那样简单。经理看了ios的设计后觉得不错让我也用类似的设计，可是ios本来就有PickView控件，但是Android没有，得自定义。<br>一开始想过用已有控件实现，比如listView或ScrollView，但是效果都不好。最后只能选择绘制了。</p>
-<hr>
+<a id="more"></a>
 <h2 id="一，首先实现ScrollerNumberPicker的功能："><a href="#一，首先实现ScrollerNumberPicker的功能：" class="headerlink" title="一，首先实现ScrollerNumberPicker的功能："></a>一，首先实现ScrollerNumberPicker的功能：</h2><p><img src="/images/1.jpg" alt="1"></p>
 <p>绘制分为三部分：绘制分割线，绘制遮盖板，绘制选项内容</p>
 <h3 id="1-绘制分割线-amp-遮盖板"><a href="#1-绘制分割线-amp-遮盖板" class="headerlink" title="1.绘制分割线&amp;遮盖板"></a>1.绘制分割线&amp;遮盖板</h3><p>前两部分比较简单</p>
