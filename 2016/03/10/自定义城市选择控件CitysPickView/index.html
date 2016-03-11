@@ -64,7 +64,7 @@
 <meta property="og:site_name" content="MSC">
 <meta property="og:description" content="前言以前项目的一个需求，要求填写城市，但让用户自己填写容易出错，所以用选择的方式。本来一个Spinner控件就行了，但是事情永远不会和想的那样简单。经理看了ios的设计后觉得不错让我也用类似的设计，可是ios本来就有PickView控件，但是Android没有，得自定义。一开始想过用已有控件实现，比如listView或ScrollView，但是效果都不好。最后只能选择绘制了。">
 <meta property="og:image" content="http://7xrq6l.com1.z0.glb.clouddn.com/1.jpg">
-<meta property="og:updated_time" content="2016-03-10T08:53:34.025Z">
+<meta property="og:updated_time" content="2016-03-11T02:39:59.057Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="自定义城市选择控件CitysPickView+使用Rxjava改进">
 <meta name="twitter:description" content="前言以前项目的一个需求，要求填写城市，但让用户自己填写容易出错，所以用选择的方式。本来一个Spinner控件就行了，但是事情永远不会和想的那样简单。经理看了ios的设计后觉得不错让我也用类似的设计，可是ios本来就有PickView控件，但是Android没有，得自定义。一开始想过用已有控件实现，比如listView或ScrollView，但是效果都不好。最后只能选择绘制了。">
@@ -109,7 +109,10 @@
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
-      <div class="header-inner"><div class="site-meta ">
+      <div class="header-inner"><a href="https://github.com/danding1207"><img style="position: absolute; top: 0; left: 0; border: 0;" src="https://camo.githubusercontent.com/82b228a3648bf44fc1163ef44c62fcc60081495e/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f6c6566745f7265645f6161303030302e706e67" alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_left_red_aa0000.png"></a>
+
+
+<div class="site-meta ">
   
 
   <div class="custom-logo-site-title">
@@ -176,6 +179,16 @@
           </a>
         </li>
       
+        
+        <li class="menu-item menu-item-commonweal">
+          <a href="/404.html" rel="section">
+            
+              <i class="menu-item-icon fa fa-heartbeat fa-fw"></i> <br />
+            
+            公益404
+          </a>
+        </li>
+      
 
       
     </ul>
@@ -234,6 +247,13 @@
           
 
           
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/03/10/自定义城市选择控件CitysPickView/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/03/10/自定义城市选择控件CitysPickView/" itemprop="commentsCount"></span>
+                </a>
+              </span>
             
           
 
@@ -311,7 +331,7 @@
 <h3 id="4-调用Observable方法"><a href="#4-调用Observable方法" class="headerlink" title="4.调用Observable方法:"></a>4.调用<strong>Observable</strong>方法:</h3><p>在<strong>CityPickerView</strong>类：</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br></pre></td><td class="code"><pre><span class="line">provincePicker.selectChanges(provincePicker)</span><br><span class="line">                <span class="comment">// 在ui线程观察</span></span><br><span class="line">                .subscribeOn(AndroidSchedulers.mainThread())</span><br><span class="line">                <span class="comment">// 交互响应时间差 600ms</span></span><br><span class="line">                .debounce(<span class="number">600</span>, TimeUnit.MILLISECONDS, Schedulers.io())</span><br><span class="line">                <span class="comment">// 只响应一个异步请求</span></span><br><span class="line">                .switchMap(<span class="keyword">new</span> Func1&lt;ScrollerNumberPicker.OnSelectEvent, Observable&lt;CityResult&gt;&gt;() &#123;</span><br><span class="line">                    <span class="meta">@Override</span></span><br><span class="line">                    <span class="function"><span class="keyword">public</span> Observable&lt;CityResult&gt; <span class="title">call</span><span class="params">(ScrollerNumberPicker.OnSelectEvent onSelectEvent)</span> </span>&#123;</span><br><span class="line">                        <span class="keyword">if</span> (onSelectEvent.isSelected) &#123;</span><br><span class="line">                            <span class="keyword">if</span>(tempProvinceIndex!=onSelectEvent.id) &#123;</span><br><span class="line">                                tempProvinceIndex = onSelectEvent.id;</span><br><span class="line">                                <span class="keyword">return</span> getCitys(provinces.get(onSelectEvent.id).CityCode, <span class="string">"010001"</span>);</span><br><span class="line">                            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                                <span class="keyword">return</span> Observable.create(<span class="keyword">new</span> Observable.OnSubscribe&lt;CityResult&gt;() &#123;</span><br><span class="line">                                    <span class="meta">@Override</span></span><br><span class="line">                                    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">call</span><span class="params">(Subscriber&lt;? <span class="keyword">super</span> CityResult&gt; subscriber)</span> </span>&#123;</span><br><span class="line">                                        subscriber.onNext(<span class="keyword">null</span>);</span><br><span class="line">                                    &#125;</span><br><span class="line">                                &#125;);</span><br><span class="line">                            &#125;</span><br><span class="line">                        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                            <span class="keyword">return</span> Observable.create(<span class="keyword">new</span> Observable.OnSubscribe&lt;CityResult&gt;() &#123;</span><br><span class="line">                                <span class="meta">@Override</span></span><br><span class="line">                                <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">call</span><span class="params">(Subscriber&lt;? <span class="keyword">super</span> CityResult&gt; subscriber)</span> </span>&#123;</span><br><span class="line">                                    subscriber.onNext(<span class="keyword">null</span>);</span><br><span class="line">                                &#125;</span><br><span class="line">                            &#125;);</span><br><span class="line">                        &#125;</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;)</span><br><span class="line">                <span class="comment">// 网络操作在io线程</span></span><br><span class="line">                .subscribeOn(Schedulers.io())</span><br><span class="line">                .map(<span class="keyword">new</span> Func1&lt;CityResult, ArrayList&lt;City&gt;&gt;() &#123;</span><br><span class="line">                    <span class="meta">@Override</span></span><br><span class="line">                    <span class="function"><span class="keyword">public</span> ArrayList&lt;City&gt; <span class="title">call</span><span class="params">(CityResult cityResult)</span> </span>&#123;</span><br><span class="line">                        <span class="keyword">return</span> cityResult == <span class="keyword">null</span> ? <span class="keyword">null</span> : cityResult.getResponseFields();</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;)</span><br><span class="line">                .observeOn(AndroidSchedulers.mainThread())</span><br><span class="line">                .subscribe(<span class="keyword">new</span> Action1&lt;ArrayList&lt;City&gt;&gt;() &#123;</span><br><span class="line">                    <span class="meta">@Override</span></span><br><span class="line">                    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">call</span><span class="params">(ArrayList&lt;City&gt; cities)</span> </span>&#123;</span><br><span class="line">                        citys = cities;</span><br><span class="line">                        <span class="keyword">if</span> (citys == <span class="keyword">null</span>) &#123;</span><br><span class="line">                            citys = <span class="keyword">new</span> ArrayList&lt;City&gt;();</span><br><span class="line">                        &#125;</span><br><span class="line">                        cityPicker.setCity(citys);</span><br><span class="line">                        <span class="keyword">if</span> (citys.size() &gt; <span class="number">0</span>) &#123;</span><br><span class="line">                            temCityIndex = <span class="number">0</span>;</span><br><span class="line">                            cityPicker.setDefault(<span class="number">0</span>);</span><br><span class="line">                        &#125;</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;);</span><br></pre></td></tr></table></figure>
 <p>ok，本篇结束，由于水平有限，错误之处在所难免，请诸位多多包涵，不吝指点。</p>
-<p><script async src="//danding1207.github.io"></script><br><span id="busuanzi_container_site_pv">本站总访问量<span id="busuanzi_value_site_pv"></span>次</span></p>
+<p><span id="busuanzi_container_page_pv"><br>  本文总阅读量<span id="busuanzi_value_page_pv"></span>次<br></span></p>
 
       
     </div>
@@ -368,6 +388,10 @@
 
           
   <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2016/03/10/自定义城市选择控件CitysPickView/"
+           data-title="自定义城市选择控件CitysPickView+使用Rxjava改进" data-url="http://yoursite.com/2016/03/10/自定义城市选择控件CitysPickView/">
+      </div>
     
   </div>
 
@@ -503,6 +527,13 @@
     NexT.Muse
   </a>
 </div>
+
+<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+
+<span id="busuanzi_container_site_uv">
+  本站访客数<span id="busuanzi_value_site_uv"></span>人次
+</span>
 
 
 
@@ -726,9 +757,28 @@
 
   
 
+  
+    
+  
 
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"danding1207"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
 
   
+    
+  
+
+
 
 
 
