@@ -1,0 +1,845 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css"/>
+
+
+
+
+  <link href="//fonts.googleapis.com/css?family=Lato:300,400,700,400italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=0.5.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=0.5.0" />
+
+
+
+
+
+
+<meta name="description" content="突然想来安利一个好用的ui类库，MaterialDrawer。听名字就知道：第一，是一个符合Material Design设计风格的控件，第二，是个抽屉控件。github抽屉控件很多，以前经常用的SlidingMenu。其实Google 官方 在design support 包中就有一个不错的控件 NavigationView ，但是 NavigationView 自由度不是很好, 很多都写死了不">
+<meta property="og:type" content="article">
+<meta property="og:title" content="灵活易用的侧滑控件MaterialDrawer">
+<meta property="og:url" content="http://yoursite.com/2016/03/11/灵活易用的侧滑控件MaterialDrawer/index.html">
+<meta property="og:site_name" content="MSC">
+<meta property="og:description" content="突然想来安利一个好用的ui类库，MaterialDrawer。听名字就知道：第一，是一个符合Material Design设计风格的控件，第二，是个抽屉控件。github抽屉控件很多，以前经常用的SlidingMenu。其实Google 官方 在design support 包中就有一个不错的控件 NavigationView ，但是 NavigationView 自由度不是很好, 很多都写死了不">
+<meta property="og:image" content="http://7xrq6l.com1.z0.glb.clouddn.com/2.jpg">
+<meta property="og:image" content="http://7xrq6l.com1.z0.glb.clouddn.com/3.jpg">
+<meta property="og:updated_time" content="2016-03-14T07:07:23.105Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="灵活易用的侧滑控件MaterialDrawer">
+<meta name="twitter:description" content="突然想来安利一个好用的ui类库，MaterialDrawer。听名字就知道：第一，是一个符合Material Design设计风格的控件，第二，是个抽屉控件。github抽屉控件很多，以前经常用的SlidingMenu。其实Google 官方 在design support 包中就有一个不错的控件 NavigationView ，但是 NavigationView 自由度不是很好, 很多都写死了不">
+<meta name="twitter:image" content="http://7xrq6l.com1.z0.glb.clouddn.com/2.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Muse',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: '博主'
+    }
+  };
+</script>
+
+  <title> 灵活易用的侧滑控件MaterialDrawer | MSC </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><a href="https://github.com/danding1207"><img style="position: absolute; top: 0; left: 0; border: 0;" src="https://camo.githubusercontent.com/82b228a3648bf44fc1163ef44c62fcc60081495e/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f6c6566745f7265645f6161303030302e706e67" alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_left_red_aa0000.png"></a>
+
+
+<div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">MSC</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle"></p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-home fa-fw"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-user fa-fw"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-archive fa-fw"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-tags fa-fw"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-commonweal">
+          <a href="/404.html" rel="section">
+            
+              <i class="menu-item-icon fa fa-heartbeat fa-fw"></i> <br />
+            
+            公益404
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="#" class="st-search-show-outputs">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <form class="site-search-form">
+  <input type="text" id="st-search-input" class="st-search-input st-default-search-input" />
+</form>
+
+<script type="text/javascript">
+  (function(w,d,t,u,n,s,e){w['SwiftypeObject']=n;w[n]=w[n]||function(){
+    (w[n].q=w[n].q||[]).push(arguments);};s=d.createElement(t);
+    e=d.getElementsByTagName(t)[0];s.async=1;s.src=u;e.parentNode.insertBefore(s,e);
+  })(window,document,'script','//s.swiftypecdn.com/install/v2/st.js','_st');
+
+  _st('install', 'Q8MuyqQAuWvBVCPaUVsp','2.0.0');
+</script>
+
+
+
+    </div>
+  
+</nav> </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                灵活易用的侧滑控件MaterialDrawer
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-03-11T10:01:53+08:00" content="Mar 11 2016">
+              Mar 11 2016
+            </time>
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/03/11/灵活易用的侧滑控件MaterialDrawer/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/03/11/灵活易用的侧滑控件MaterialDrawer/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>突然想来安利一个好用的ui类库，<strong>MaterialDrawer</strong>。听名字就知道：第一，是一个符合Material Design设计风格的控件，第二，是个抽屉控件。github抽屉控件很多，以前经常用的<strong>SlidingMenu</strong>。其实Google 官方 在<strong>design support</strong> 包中就有一个不错的控件 <strong>NavigationView</strong> ，但是 <strong>NavigationView</strong> 自由度不是很好, 很多都写死了不可以自由定义布局, 而 <strong>MaterialDrawer</strong> 能够实现跟 <strong>NavigationView</strong> 一样的效果, 同时还支持自定义效果, 自由度非常高。</p>
+<p>github的地址： <a href="https://github.com/mikepenz/MaterialDrawer" target="_blank" rel="external"><strong>MaterialDrawer</strong></a></p>
+<p>放出github上的截图：</p>
+<p><img src="http://7xrq6l.com1.z0.glb.clouddn.com/2.jpg" alt="3"><br><a id="more"></a><br><img src="http://7xrq6l.com1.z0.glb.clouddn.com/3.jpg" alt="3"></p>
+<p>使用非常简单：</p>
+<h3 id="1-在android-studio中自己应用-module-的gradle-添加下面代码："><a href="#1-在android-studio中自己应用-module-的gradle-添加下面代码：" class="headerlink" title="1. 在android studio中自己应用 module 的gradle 添加下面代码："></a>1. 在android studio中自己应用 module 的gradle 添加下面代码：</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">compile(<span class="string">'com.mikepenz:materialdrawer:5.1.2@aar'</span>) &#123;</span><br><span class="line">    transitive = <span class="keyword">true</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>然后 <strong>Sync Now</strong> 就好了。</p>
+<h3 id="2-最简单的添加抽屉的代码是："><a href="#2-最简单的添加抽屉的代码是：" class="headerlink" title="2. 最简单的添加抽屉的代码是："></a>2. 最简单的添加抽屉的代码是：</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">new</span> DrawerBuilder().withActivity(<span class="keyword">this</span>).build();</span><br></pre></td></tr></table></figure>
+<p>当然这样添加的抽屉是空白的，我们需要添加选项，有一十九种类型的 DrawerItem ：<br>(1).  <em>DividerDrawerItem</em>  分割线<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">new</span> DividerDrawerItem();</span><br></pre></td></tr></table></figure></p>
+<p>(2).  <em>ExpandableDrawerItem</em> 可展开的选项，可以包含其他选项<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">new</span> ExpandableDrawerItem().withName(..).withIcon(..).withIdentifier(<span class="number">19</span>).withSelectable(<span class="keyword">false</span>).withSubItems(</span><br><span class="line">    <span class="keyword">new</span> PrimaryDrawerItem().withName(..).withDescription(..).withIcon(..).withIdentifier(<span class="number">15</span>).withSelectable(<span class="keyword">false</span>),</span><br><span class="line">    <span class="keyword">new</span> SecondaryDrawerItem().withName(..).withLevel(<span class="number">2</span>).withIcon(..).withIdentifier(<span class="number">2000</span>),</span><br><span class="line">    <span class="keyword">new</span> SecondaryDrawerItem().withName(..).withLevel(<span class="number">2</span>).withIcon(..).withIdentifier(<span class="number">2001</span>));</span><br></pre></td></tr></table></figure></p>
+<p>(3).  <em>PrimaryDrawerItem</em> 主选项，可以设置名称,描述,图标,id,能否选中,Badge计数提醒（字色和背景颜色可以自定义）,Tag<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">new</span> PrimaryDrawerItem()</span><br><span class="line">    .withName(R.string.drawer_item_non_translucent_status_drawer)</span><br><span class="line">    .withDescription(R.string.drawer_item_non_translucent_status_drawer_desc)</span><br><span class="line">    .withIcon(FontAwesome.Icon.faw_eye)</span><br><span class="line">    .withIdentifier(<span class="number">4</span>)</span><br><span class="line">    .withSelectable(<span class="keyword">false</span>)</span><br><span class="line">    .withBadgeStyle(<span class="keyword">new</span> BadgeStyle().withTextColor(Color.WHITE).withColorRes(R.color.md_red_700))</span><br><span class="line">    .withTag(<span class="string">"Bullhorn"</span>);</span><br></pre></td></tr></table></figure></p>
+<p>(4).  <em>ProfileDrawerItem</em> Profile选项，每个Profile代表一个用户，可以设置名称，邮箱，头像，id<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">new</span> ProfileDrawerItem()</span><br><span class="line">    .withName(<span class="string">"Batman"</span>)</span><br><span class="line">    .withEmail(<span class="string">"batman@gmail.com"</span>)</span><br><span class="line">    .withIcon(R.drawable.profile5)</span><br><span class="line">    .withIdentifier(<span class="number">105</span>);</span><br></pre></td></tr></table></figure></p>
+<p>(5).  <em>ProfileSettingDrawerItem</em> Profile设置选项，比如：添加Profile，管理Profile<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">new</span> ProfileSettingDrawerItem()</span><br><span class="line">    .withName(<span class="string">"Add Account"</span>)</span><br><span class="line">    .withDescription(<span class="string">"Add new GitHub Account"</span>)</span><br><span class="line">    .withIcon(..)</span><br><span class="line">    .withIdentifier(PROFILE_SETTING);</span><br></pre></td></tr></table></figure></p>
+<p>(6).  <em>SecondaryDrawerItem</em> 次级选项，图标和字都要小一点，可以设置Level（<strong>起始位置，1时和PrimaryDrawerItem对齐，数字变大则起始位置后移，默认为1</strong>）<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">new</span> SecondaryDrawerItem()</span><br><span class="line">    .withName(<span class="string">"CollapsableItem"</span>)</span><br><span class="line">    .withLevel(<span class="number">1</span>)</span><br><span class="line">    .withIcon(GoogleMaterial.Icon.gmd_8tracks)</span><br><span class="line">    .withIdentifier(<span class="number">2000</span>)</span><br><span class="line">    .withTag(<span class="string">"Bullhorn"</span>);</span><br></pre></td></tr></table></figure></p>
+<p>(7).  <em>SecondarySwitchDrawerItem</em> 次级带SwitchButton选项<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">new</span> SecondarySwitchDrawerItem()</span><br><span class="line">    .withName(<span class="string">"Secondary Switch2"</span>)</span><br><span class="line">    .withIcon(Octicons.Icon.oct_tools)</span><br><span class="line">    .withChecked(<span class="keyword">true</span>)</span><br><span class="line">    .withOnCheckedChangeListener(onCheckedChangeListener)</span><br><span class="line">    .withSelectable(<span class="keyword">false</span>);</span><br></pre></td></tr></table></figure></p>
+<p>(8).  <em>SecondaryToggleDrawerItem</em> 次级带ToggleButton选项<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">new</span> SecondaryToggleDrawerItem()</span><br><span class="line">    .withName(<span class="string">"Secondary toggle"</span>)</span><br><span class="line">    .withIcon(Octicons.Icon.oct_tools)</span><br><span class="line">    .withChecked(<span class="keyword">true</span>)</span><br><span class="line">    .withOnCheckedChangeListener(onCheckedChangeListener);</span><br></pre></td></tr></table></figure></p>
+<p>(9).  <em>SectionDrawerItem</em> 分区块选项，自带分割线，可设置区块的标题<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">new</span> SectionDrawerItem().withName(...);</span><br></pre></td></tr></table></figure></p>
+<p>(10).  <em>SwitchDrawerItem</em> 带SwitchButton选项<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">new</span> SwitchDrawerItem()</span><br><span class="line">    .withName(<span class="string">"Switch2"</span>)</span><br><span class="line">    .withIcon(Octicons.Icon.oct_tools)</span><br><span class="line">    .withChecked(<span class="keyword">true</span>)</span><br><span class="line">    .withOnCheckedChangeListener(onCheckedChangeListener)</span><br><span class="line">    .withSelectable(<span class="keyword">false</span>);</span><br></pre></td></tr></table></figure></p>
+<p>(11).  <em>ToggleDrawerItem</em> 带ToggleButton选项<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">new</span> ToggleDrawerItem()</span><br><span class="line">    .withName(<span class="string">"Toggle"</span>)</span><br><span class="line">    .withIcon(Octicons.Icon.oct_tools)</span><br><span class="line">    .withChecked(<span class="keyword">true</span>)</span><br><span class="line">    .withOnCheckedChangeListener(onCheckedChangeListener);</span><br></pre></td></tr></table></figure></p>
+<p>(12).  <em>ContainerDrawerItem</em> 可以包含其他View(居中)的选项，可以自带分割线(选项下方)<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">new</span> ContainerDrawerItem()</span><br><span class="line">    .withView(<span class="keyword">new</span> ProgressBar(<span class="keyword">this</span>))</span><br><span class="line">    .withDivider(<span class="keyword">true</span>)</span><br></pre></td></tr></table></figure></p>
+<p>(13).  <em>MiniDrawerItem</em> MiniDrawer的选项(一般不新建而是从正常Drawer获得)<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">new</span> MiniDrawerItem()</span><br><span class="line">    .withCustomHeightRes</span><br><span class="line">    .withIcon(Octicons.Icon.oct_trashcan)</span><br><span class="line">    .withName(<span class="string">"MiniDrawerItem"</span>)</span><br></pre></td></tr></table></figure></p>
+<p>(14).  <em>MiniProfileDrawerItem</em> MiniDrawer的Profile选项(一般不新建而是从正常Drawer获得)<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">new</span> MiniProfileDrawerItem()</span><br><span class="line">    .withName(<span class="string">"Batman"</span>)</span><br><span class="line">    .withEmail(<span class="string">"batman@gmail.com"</span>)</span><br><span class="line">    .withIcon(R.drawable.profile5)</span><br><span class="line">    .withIdentifier(<span class="number">105</span>);</span><br></pre></td></tr></table></figure></p>
+<p>(15).  <em>CustomCenteredPrimaryDrawerItem</em> 居中样式的主选项<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">new</span> CustomCenteredPrimaryDrawerItem()</span><br><span class="line">    .withName(<span class="string">"CustomCentered"</span>)</span><br><span class="line">    .withIcon(Octicons.Icon.oct_zap)</span><br><span class="line">    .withDescription(<span class="string">"CenteredPrimaryDrawerItem"</span>)</span><br></pre></td></tr></table></figure></p>
+<p>(16).  <em>CustomPrimaryDrawerItem</em> 可以自定义背景颜色的主选项<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">new</span> CustomPrimaryDrawerItem()</span><br><span class="line">    .withBackgroundRes(R.color.accent)</span><br><span class="line">    .withName(R.string.drawer_item_free_play)</span><br><span class="line">    .withIcon(FontAwesome.Icon.faw_gamepad)</span><br></pre></td></tr></table></figure></p>
+<p>(17).  <em>CustomUrlPrimaryDrawerItem</em> 可以自定义icon网络地址的主选项<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">new</span> CustomUrlPrimaryDrawerItem()</span><br><span class="line">    .withName(R.string.drawer_item_fragment_drawer)</span><br><span class="line">    .withDescription(R.string.drawer_item_fragment_drawer_desc)</span><br><span class="line">    .withIcon(<span class="string">"https://avatars3.githubusercontent.com/u/1476232?v=3&amp;s=460"</span>)</span><br></pre></td></tr></table></figure></p>
+<p>(18).  <em>IconDrawerItem</em> 没有文字只有图标的选项<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">new</span> IconDrawerItem()</span><br><span class="line">    .withIcon(Octicons.Icon.oct_bell)</span><br><span class="line">    .withSelectedIconColorRes(R.color.md_orange_900)</span><br></pre></td></tr></table></figure></p>
+<p>(19).<em>OverflowMenuDrawerItem</em> 带悬浮菜单的选项<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">new</span> OverflowMenuDrawerItem()</span><br><span class="line">    .withName(R.string.drawer_item_menu_drawer_item)</span><br><span class="line">    .withDescription(R.string.drawer_item_menu_drawer_item_desc)</span><br><span class="line">    .withMenu(R.menu.fragment_menu)</span><br><span class="line">    .withOnMenuItemClickListener(<span class="keyword">new</span> PopupMenu.OnMenuItemClickListener() &#123;</span><br><span class="line">        <span class="meta">@Override</span></span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">onMenuItemClick</span><span class="params">(MenuItem item)</span> </span>&#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;)</span><br><span class="line">    .withIcon(GoogleMaterial.Icon.gmd_filter_center_focus)</span><br></pre></td></tr></table></figure></p>
+<h3 id="3-创建抽屉头："><a href="#3-创建抽屉头：" class="headerlink" title="3. 创建抽屉头："></a>3. 创建抽屉头：</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line">headerResult = <span class="keyword">new</span> AccountHeaderBuilder()</span><br><span class="line">    .withActivity(<span class="keyword">this</span>)</span><br><span class="line">    .withTranslucentStatusBar(<span class="keyword">true</span>)</span><br><span class="line">    .withHeaderBackground(R.drawable.header)</span><br><span class="line">    .addProfiles(</span><br><span class="line">        <span class="keyword">new</span> ProfileDrawerItem()</span><br><span class="line">            .withName(<span class="string">"Batman"</span>)</span><br><span class="line">            .withEmail(<span class="string">"batman@gmail.com"</span>)</span><br><span class="line">            .withIcon(R.drawable.profile5)</span><br><span class="line">            .withIdentifier(<span class="number">105</span>),</span><br><span class="line">        <span class="keyword">new</span> ProfileSettingDrawerItem()</span><br><span class="line">            .withName(<span class="string">"Add Account"</span>)</span><br><span class="line">            .withDescription(<span class="string">"Add new GitHub Account"</span>)</span><br><span class="line">            .withIcon(...)</span><br><span class="line">            .withIdentifier(PROFILE_SETTING),</span><br><span class="line">        <span class="keyword">new</span> ProfileSettingDrawerItem()</span><br><span class="line">            .withName(<span class="string">"Manage Account"</span>)</span><br><span class="line">            .withIcon(GoogleMaterial.Icon.gmd_settings)</span><br><span class="line">            .withIdentifier(<span class="number">100001</span>)</span><br><span class="line">    )</span><br><span class="line">    .withOnAccountHeaderListener(<span class="keyword">new</span> AccountHeader.OnAccountHeaderListener() &#123;</span><br><span class="line">        <span class="meta">@Override</span> <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">onProfileChanged</span><span class="params">(View view, IProfile profile, <span class="keyword">boolean</span> current)</span> </span>&#123;</span><br><span class="line">            <span class="keyword">if</span> (profile <span class="keyword">instanceof</span> IDrawerItem &amp;&amp; profile.getIdentifier() == PROFILE_SETTING) &#123;</span><br><span class="line">                <span class="keyword">int</span> count = <span class="number">100</span> + headerResult.getProfiles().size() + <span class="number">1</span>;</span><br><span class="line">                IProfile newProfile = <span class="keyword">new</span> ProfileDrawerItem()</span><br><span class="line">                    .withNameShown(<span class="keyword">true</span>)</span><br><span class="line">                    .withName(<span class="string">"Batman"</span> + count)</span><br><span class="line">                    .withEmail(<span class="string">"batman"</span> + count + <span class="string">"@gmail.com"</span>)</span><br><span class="line">                    .withIcon(R.drawable.profile5)</span><br><span class="line">                    .withIdentifier(count);</span><br><span class="line">                <span class="keyword">if</span> (headerResult.getProfiles() != <span class="keyword">null</span>) &#123;</span><br><span class="line">                    <span class="comment">//we know that there are 2 setting elements. set the new profile above them ;)</span></span><br><span class="line">                    headerResult.addProfile(newProfile, headerResult.getProfiles().size() - <span class="number">2</span>);</span><br><span class="line">                &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                    headerResult.addProfiles(newProfile);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="comment">//false if you have not consumed the event and it should close the drawer</span></span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">false</span>; &#125;</span><br><span class="line">        &#125;)</span><br><span class="line">    .withSavedInstance(savedInstanceState)</span><br><span class="line">    .build();</span><br></pre></td></tr></table></figure>
+<p>头有两种布局：<br>较大的(显示之前的2个Profile)和较小的(不显示),由<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">.withCompactStyle(<span class="keyword">true</span>)</span><br></pre></td></tr></table></figure></p>
+<p>设置，true为较小的。<br>在addProfiles()里添加ProfileDrawerItem和ProfileSettingDrawerItem。而选项的点击事件在withOnAccountHeaderListener()里实现。withHeaderBackground()设置背景，withTranslucentStatusBar()设置状态栏是否透明。</p>
+<p>当然可以自定义Header样式：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">.withHeightPx(UIUtils.getActionBarHeight(<span class="keyword">this</span>)) <span class="comment">//高度</span></span><br><span class="line">.withAccountHeader(R.layout.material_drawer_compact_persistent_header) <span class="comment">//自定义Header样式</span></span><br></pre></td></tr></table></figure>
+<p>当然也可以直接添加布局作为Header或Footer：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">new</span> DrawerBuilder()</span><br><span class="line">    .withHeader(R.layout.header) <span class="comment">//添加布局作为Header</span></span><br><span class="line">    .withFooter(R.layout.footer) <span class="comment">//添加布局作为Footer</span></span><br></pre></td></tr></table></figure>
+<h3 id="4-创建抽屉："><a href="#4-创建抽屉：" class="headerlink" title="4. 创建抽屉："></a>4. 创建抽屉：</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line">result = <span class="keyword">new</span> DrawerBuilder()</span><br><span class="line">    .withActivity(<span class="keyword">this</span>)</span><br><span class="line">    .withAccountHeader(headerResult)</span><br><span class="line">    .addDrawerItems(</span><br><span class="line">        <span class="keyword">new</span> PrimaryDrawerItem()</span><br><span class="line">            .withName(R.string.drawer_item_home)</span><br><span class="line">            .withIcon(FontAwesome.Icon.faw_home)</span><br><span class="line">            .withIdentifier(<span class="number">1</span>),</span><br><span class="line">        <span class="keyword">new</span> PrimaryDrawerItem()</span><br><span class="line">            .withName(R.string.drawer_item_free_play)</span><br><span class="line">            .withIcon(FontAwesome.Icon.faw_gamepad),</span><br><span class="line">        <span class="keyword">new</span> PrimaryDrawerItem()</span><br><span class="line">            .withName(R.string.drawer_item_custom)</span><br><span class="line">            .withIcon(FontAwesome.Icon.faw_eye).withIdentifier(<span class="number">5</span>),</span><br><span class="line">        <span class="keyword">new</span> SectionDrawerItem()</span><br><span class="line">            .withName(R.string.drawer_item_section_header),</span><br><span class="line">        <span class="keyword">new</span> SecondaryDrawerItem()</span><br><span class="line">            .withName(R.string.drawer_item_settings)</span><br><span class="line">            .withIcon(FontAwesome.Icon.faw_cog),</span><br><span class="line">        <span class="keyword">new</span> SecondaryDrawerItem()</span><br><span class="line">            .withName(R.string.drawer_item_help)</span><br><span class="line">            .withIcon(FontAwesome.Icon.faw_question)</span><br><span class="line">            .withEnabled(<span class="keyword">false</span>)</span><br><span class="line">    )</span><br><span class="line">    .withOnDrawerItemClickListener(<span class="keyword">new</span> Drawer.OnDrawerItemClickListener() &#123;</span><br><span class="line">        <span class="meta">@Override</span></span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">onItemClick</span><span class="params">(View view, <span class="keyword">int</span> position, IDrawerItem drawerItem)</span> </span>&#123;</span><br><span class="line">            <span class="keyword">if</span> (drawerItem != <span class="keyword">null</span> &amp;&amp; drawerItem.getIdentifier() == <span class="number">1</span>) &#123;             ...</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">if</span> (drawerItem <span class="keyword">instanceof</span> Nameable) &#123;</span><br><span class="line">                toolbar.setTitle(((Nameable) drawerItem)</span><br><span class="line">                    .getName()</span><br><span class="line">                    .getText(CompactHeaderDrawerActivity.<span class="keyword">this</span>));</span><br><span class="line">                        &#125;</span><br><span class="line"></span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;)</span><br><span class="line">    .withSavedInstance(savedInstanceState)</span><br><span class="line">    .build();</span><br></pre></td></tr></table></figure>
+<h4 id="1-保持状态："><a href="#1-保持状态：" class="headerlink" title="1. 保持状态："></a>1. 保持状态：</h4><p><strong>AccountHeaderBuilder</strong>和<strong>DrawerBuilder</strong>都可以保持状态，<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">.withSavedInstance(savedInstanceState) <span class="comment">//抽屉的状态保持</span></span><br></pre></td></tr></table></figure></p>
+<p>并重写<strong>onSaveInstanceState</strong>方法：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Override</span></span><br><span class="line"><span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onSaveInstanceState</span><span class="params">(Bundle outState)</span> </span>&#123;</span><br><span class="line">    <span class="comment">//add the values which need to be saved from the drawer to the bundle</span></span><br><span class="line">    outState = result.saveInstanceState(outState);</span><br><span class="line">    <span class="comment">//add the values which need to be saved from the accountHeader to the bundle</span></span><br><span class="line">    outState = headerResult.saveInstanceState(outState);</span><br><span class="line">    <span class="keyword">super</span>.onSaveInstanceState(outState);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h4 id="2-关于StatusBar，ActionBar和Toolbar："><a href="#2-关于StatusBar，ActionBar和Toolbar：" class="headerlink" title="2. 关于StatusBar，ActionBar和Toolbar："></a>2. 关于<strong>StatusBar</strong>，<strong>ActionBar</strong>和<strong>Toolbar</strong>：</h4><p>ActionBar会显示在Drawer上层，即ActionBar会遮盖住Drawer的一部分，<br>当然可以设置让Drawer整体都在ActionBar下方这样就不会遮盖：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">.withDrawerLayout(R.layout.material_drawer_fits_not)</span><br></pre></td></tr></table></figure></p>
+<p>布局文件：只需要一个DrawerLayout<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;android.support.v4.widget.DrawerLayout</span><br><span class="line">    xmlns:android=<span class="string">"http://schemas.android.com/apk/res/android"</span></span><br><span class="line">    android:id=<span class="string">"@+id/material_drawer_layout"</span></span><br><span class="line">    android:layout_width=<span class="string">"match_parent"</span></span><br><span class="line">    android:layout_height=<span class="string">"match_parent"</span> /&gt;</span><br></pre></td></tr></table></figure></p>
+<p>Toolbar则会显示在Drawer下层，即Toolbar不会遮盖住Drawer。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">.withToolbar(toolbar)</span><br></pre></td></tr></table></figure></p>
+<p>StatusBar的显示需要设置：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">.withDisplayBelowStatusBar(<span class="keyword">false</span>) <span class="comment">//true：抽屉内容将显示在状态栏下面</span></span><br></pre></td></tr></table></figure></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">.withTranslucentStatusBar(<span class="keyword">false</span>) <span class="comment">//false：状态栏会覆盖抽屉</span></span><br></pre></td></tr></table></figure>
+<h4 id="3-显示Badge："><a href="#3-显示Badge：" class="headerlink" title="3. 显示Badge："></a>3. 显示Badge：</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">result.updateBadge(<span class="number">4</span>, <span class="keyword">new</span> StringHolder(<span class="number">10</span> + <span class="string">""</span>));</span><br></pre></td></tr></table></figure>
+<p>第一个参数是选项Id，第二个参数类型是StringHolder，而不是String。</p>
+<h4 id="4-Drawer的位置："><a href="#4-Drawer的位置：" class="headerlink" title="4. Drawer的位置："></a>4. Drawer的位置：</h4><p>Drawer可以在屏幕左边或者右边，当然可以两边都有（新建两个位置不同的Drawer）：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">.withDrawerGravity(Gravity.END) <span class="comment">//默认为START，即屏幕左边；</span></span><br></pre></td></tr></table></figure></p>
+<h4 id="5-设置Listener："><a href="#5-设置Listener：" class="headerlink" title="5. 设置Listener："></a>5. 设置Listener：</h4><p>(1)OnDrawerItemClickListener 选项的单击事件：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">.withOnDrawerItemClickListener(<span class="keyword">new</span> Drawer.OnDrawerItemClickListener() &#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">onItemClick</span><span class="params">(View view, <span class="keyword">int</span> position, IDrawerItem drawerItem)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (drawerItem <span class="keyword">instanceof</span> Nameable) &#123;&#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure></p>
+<p>注意onItemClick()的参数position，从0开始但是包含所有选项(包括分割线，区间)，所以最好按ID:drawerItem.getIdentifier()区分。</p>
+<p>IDrawerItem可以简单的分类：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">drawerItem instanceof Nameable</span><br></pre></td></tr></table></figure></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">drawerItem instanceof Badgeable</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">drawerItem instanceof ColorfulBadgeable</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">drawerItem instanceof Iconable</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">drawerItem instanceof Selectable</span><br><span class="line">``` </span><br><span class="line">``` </span><br><span class="line">drawerItem instanceof Tagable</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">drawerItem instanceof Typefaceable</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">drawerItem instanceof IDrawerItem</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">drawerItem instanceof IProfile</span><br></pre></td></tr></table></figure>
+<p>还有之前说过的19种选项：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">drawerItem <span class="keyword">instanceof</span> SecondaryDrawerItem</span><br><span class="line">drawerItem <span class="keyword">instanceof</span> PrimaryDrawerItem</span><br></pre></td></tr></table></figure></p>
+<p>等等……</p>
+<p>(2).withOnDrawerItemLongClickListener 选项的长按事件：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">.withOnDrawerItemLongClickListener(<span class="keyword">new</span> Drawer.OnDrawerItemLongClickListener() &#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">onItemLongClick</span><span class="params">(View view, <span class="keyword">int</span> position, IDrawerItem drawerItem)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (drawerItem <span class="keyword">instanceof</span> SecondaryDrawerItem) &#123;&#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<p>(3).withOnDrawerListener 抽屉本身开，关，滑动的事件：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">.withOnDrawerListener(<span class="keyword">new</span> Drawer.OnDrawerListener() &#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onDrawerOpened</span><span class="params">(View drawerView)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (drawerView == result.getSlider()) &#123;</span><br><span class="line">            Log.e(<span class="string">"sample"</span>, <span class="string">"left opened"</span>);</span><br><span class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> (drawerView == resultAppended.getSlider()) &#123;</span><br><span class="line">            Log.e(<span class="string">"sample"</span>, <span class="string">"right opened"</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onDrawerClosed</span><span class="params">(View drawerView)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (drawerView == result.getSlider()) &#123;</span><br><span class="line">            Log.e(<span class="string">"sample"</span>, <span class="string">"left closed"</span>);</span><br><span class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> (drawerView == resultAppended.getSlider()) &#123;</span><br><span class="line">            Log.e(<span class="string">"sample"</span>, <span class="string">"right closed"</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onDrawerSlide</span><span class="params">(View drawerView, <span class="keyword">float</span> slideOffset)</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<p>(4).withOnDrawerNavigationListener 与ToolBar的NavigationListener关联：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">.withOnDrawerNavigationListener(<span class="keyword">new</span> Drawer.OnDrawerNavigationListener() &#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">onNavigationClickListener</span><span class="params">(View clickedView)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure></p>
+<p>当ToolBar显示汉堡图标时，不触发OnDrawerNavigationListener，而是打开Drawer。<br>当ToolBar显示返回箭头时，触发OnDrawerNavigationListener，不打开Drawer。</p>
+<p>显示返回箭头：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">result.getActionBarDrawerToggle().setDrawerIndicatorEnabled(<span class="keyword">false</span>);</span><br><span class="line">getSupportActionBar().setDisplayHomeAsUpEnabled(<span class="keyword">true</span>);</span><br></pre></td></tr></table></figure></p>
+<p>显示汉堡图标：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">result.getActionBarDrawerToggle().setDrawerIndicatorEnabled(<span class="keyword">true</span>);</span><br><span class="line">getSupportActionBar().setDisplayHomeAsUpEnabled(<span class="keyword">false</span>);</span><br></pre></td></tr></table></figure></p>
+<h4 id="5-添加固定-不会滑动的-选项："><a href="#5-添加固定-不会滑动的-选项：" class="headerlink" title="5. 添加固定(不会滑动的)选项："></a>5. 添加固定(不会滑动的)选项：</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">new</span> DrawerBuilder()</span><br><span class="line">    .addStickyDrawerItems(</span><br><span class="line">        <span class="keyword">new</span> SecondaryDrawerItem()</span><br><span class="line">            .withName(R.string.drawer_item_settings)</span><br><span class="line">            .withIcon(FontAwesome.Icon.faw_cog)</span><br><span class="line">            .withIdentifier(<span class="number">10</span>),</span><br><span class="line">        <span class="keyword">new</span> SecondaryDrawerItem()</span><br><span class="line">            .withName(R.string.drawer_item_open_source)</span><br><span class="line">            .withIcon(FontAwesome.Icon.faw_github)</span><br><span class="line">    )</span><br></pre></td></tr></table></figure>
+<h4 id="6-嵌入的Drawer-嵌入布局没有抽屉的滑动效果-："><a href="#6-嵌入的Drawer-嵌入布局没有抽屉的滑动效果-：" class="headerlink" title="6. 嵌入的Drawer(嵌入布局没有抽屉的滑动效果)："></a>6. 嵌入的Drawer(嵌入布局没有抽屉的滑动效果)：</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">result = <span class="keyword">new</span> DrawerBuilder()</span><br><span class="line">               .....</span><br><span class="line">               .buildView();</span><br></pre></td></tr></table></figure>
+<p>调用buildView()方法而非build()，只会生成布局不会添加抽屉，然后把布局嵌入到你想要的地方：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">((ViewGroup) findViewById(R.id.frame_container)).addView(result.getSlider());</span><br></pre></td></tr></table></figure></p>
+<h4 id="7-设置Drawer的根布局："><a href="#7-设置Drawer的根布局：" class="headerlink" title="7. 设置Drawer的根布局："></a>7. 设置Drawer的根布局：</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">result = <span class="keyword">new</span> DrawerBuilder()</span><br><span class="line">               .withRootView(R.id.drawer_container)</span><br><span class="line">               .withActionBarDrawerToggleAnimated(<span class="keyword">true</span>)</span><br><span class="line">               .....</span><br><span class="line">               .build;</span><br></pre></td></tr></table></figure>
+<p>如此抽屉的位置则包含在R.id.drawer_container内。</p>
+<h4 id="8-使用已有Menu文件："><a href="#8-使用已有Menu文件：" class="headerlink" title="8. 使用已有Menu文件："></a>8. 使用已有Menu文件：</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">result = <span class="keyword">new</span> DrawerBuilder()</span><br><span class="line">               .inflateMenu(R.menu.example_menu)</span><br><span class="line">               .....</span><br><span class="line">               .build;</span><br></pre></td></tr></table></figure>
+<h4 id="9-创建MiniDrawer-抽屉关闭时显示MiniDrawer-："><a href="#9-创建MiniDrawer-抽屉关闭时显示MiniDrawer-：" class="headerlink" title="9. 创建MiniDrawer(抽屉关闭时显示MiniDrawer)："></a>9. 创建MiniDrawer(抽屉关闭时显示MiniDrawer)：</h4><p>先创建正常Drawer的布局：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">result = <span class="keyword">new</span> DrawerBuilder()</span><br><span class="line">               ......</span><br><span class="line">               .withGenerateMiniDrawer(<span class="keyword">true</span>)</span><br><span class="line">               .buildView();</span><br></pre></td></tr></table></figure></p>
+<p>根据正常Drawer获得MiniDrawer：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">miniResult = result.getMiniDrawer();</span><br></pre></td></tr></table></figure>
+<p>创建Crossfader：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">crossFader = <span class="keyword">new</span> Crossfader()</span><br><span class="line">    .withContent(findViewById(R.id.crossfade_content))</span><br><span class="line">    .withFirst(result.getSlider(), firstWidth)</span><br><span class="line">    .withSecond(miniResult.build(<span class="keyword">this</span>), secondWidth)</span><br><span class="line">    .withSavedInstance(savedInstanceState)</span><br><span class="line">    .build();</span><br></pre></td></tr></table></figure></p>
+<p>firstWidth是抽屉打开时的宽度，secondWidth是MiniDrawer的宽度。</p>
+<p>MiniDrawer设置Crossfader：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">miniResult.withCrossFader(<span class="keyword">new</span> CrossfadeWrapper(crossFader));</span><br></pre></td></tr></table></figure></p>
+<p>Crossfader设置阴影效果：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">crossFader.getCrossFadeSlidingPaneLayout()</span><br><span class="line">    .setShadowResourceLeft(R.drawable.material_drawer_shadow_left)</span><br></pre></td></tr></table></figure></p>
+<h4 id="10-全屏："><a href="#10-全屏：" class="headerlink" title="10. 全屏："></a>10. 全屏：</h4><p>当activity主题为全屏时，可能对齐出现问题，应该设置：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">result = <span class="keyword">new</span> DrawerBuilder()</span><br><span class="line">            .withActivity(<span class="keyword">this</span>)</span><br><span class="line">            .withFullscreen(<span class="keyword">true</span>)</span><br><span class="line">            ......</span><br></pre></td></tr></table></figure></p>
+<p>对于SDK 19以上还需要设置：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (Build.VERSION.SDK_INT &gt;= <span class="number">19</span>) &#123;</span><br><span class="line">    result.getDrawerLayout().setFitsSystemWindows(<span class="keyword">false</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h4 id="11-为fragment添加Drawer："><a href="#11-为fragment添加Drawer：" class="headerlink" title="11. 为fragment添加Drawer："></a>11. 为fragment添加Drawer：</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">result = <span class="keyword">new</span> DrawerBuilder()</span><br><span class="line">    .withActivity(getActivity())</span><br><span class="line">    .withRootView((ViewGroup) view.findViewById(R.id.rootView))</span><br><span class="line">    .withDisplayBelowStatusBar(<span class="keyword">false</span>)</span><br><span class="line">    ......</span><br><span class="line">    .buildForFragment();</span><br></pre></td></tr></table></figure>
+<p>对于SDK 19以上还需要设置：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (Build.VERSION.SDK_INT &gt;= <span class="number">19</span>) &#123;</span><br><span class="line">    result.getDrawerLayout().setFitsSystemWindows(<span class="keyword">false</span>);</span><br><span class="line">    result.getSlider().setFitsSystemWindows(<span class="keyword">false</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h4 id="12-创建两步滑动打开Drawer-第一次滑动打开MiniDrawer，再滑动打开Drawer-："><a href="#12-创建两步滑动打开Drawer-第一次滑动打开MiniDrawer，再滑动打开Drawer-：" class="headerlink" title="12. 创建两步滑动打开Drawer(第一次滑动打开MiniDrawer，再滑动打开Drawer)："></a>12. 创建两步滑动打开Drawer(第一次滑动打开MiniDrawer，再滑动打开Drawer)：</h4><p>先创建正常Drawer的布局：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">result = <span class="keyword">new</span> DrawerBuilder()</span><br><span class="line">            .withHasStableIds(<span class="keyword">true</span>)</span><br><span class="line">            .withDrawerLayout(R.layout.crossfade_drawer)</span><br><span class="line">            .withDrawerWidthDp(<span class="number">72</span>)</span><br><span class="line">            .withGenerateMiniDrawer(<span class="keyword">true</span>)</span><br><span class="line">            ......</span><br><span class="line">            .withSavedInstance(savedInstanceState)</span><br><span class="line">            .withShowDrawerOnFirstLaunch(<span class="keyword">true</span>)</span><br><span class="line">            .build();</span><br></pre></td></tr></table></figure></p>
+<p><em>R.layout.crossfade_drawer</em> 的布局就是一个 <strong>CrossfadeDrawerLayout</strong>：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;com.mikepenz.crossfadedrawerlayout.view.CrossfadeDrawerLayout xmlns:android=<span class="string">"http://schemas.android.com/apk/res/android"</span></span><br><span class="line">    android:id=<span class="string">"@+id/material_drawer_layout"</span></span><br><span class="line">    android:layout_width=<span class="string">"match_parent"</span></span><br><span class="line">    android:layout_height=<span class="string">"match_parent"</span></span><br><span class="line">    android:fitsSystemWindows=<span class="string">"true"</span> /&gt;</span><br></pre></td></tr></table></figure></p>
+<p>获取并设置CrossfadeDrawerLayout：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">crossfadeDrawerLayout = (CrossfadeDrawerLayout) result.getDrawerLayout();</span><br><span class="line"></span><br><span class="line">crossfadeDrawerLayout.setMaxWidthPx(DrawerUIUtils.getOptimalDrawerWidth(<span class="keyword">this</span>)); <span class="comment">//设置抽屉打开的最大宽度</span></span><br></pre></td></tr></table></figure></p>
+<p>获取并设置MiniDrawer：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">final</span> MiniDrawer miniResult = result.getMiniDrawer();</span><br><span class="line">View view = miniResult.build(<span class="keyword">this</span>);</span><br><span class="line">view.setBackgroundColor(...); <span class="comment">//设置背景颜色否则为透明</span></span><br></pre></td></tr></table></figure></p>
+<p>将MiniDrawer添加到CrossfadeDrawerLayout：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">crossfadeDrawerLayout</span><br><span class="line">    .getSmallView()</span><br><span class="line">    .addView(view, ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);</span><br></pre></td></tr></table></figure>
+<p>给MiniDrawer设置监听，让CrossfadeDrawerLayout能够自动打开，关闭：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">miniResult.withCrossFader(<span class="keyword">new</span> ICrossfader() &#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">crossfade</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">boolean</span> isFaded = isCrossfaded();</span><br><span class="line">        crossfadeDrawerLayout.crossfade(<span class="number">400</span>);</span><br><span class="line">        <span class="keyword">if</span> (isFaded) &#123;</span><br><span class="line">            result.getDrawerLayout().closeDrawer(GravityCompat.START);    &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">isCrossfaded</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> crossfadeDrawerLayout.isCrossfaded();</span><br><span class="line">        &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure></p>
+<h4 id="13-优化-："><a href="#13-优化-：" class="headerlink" title="13. 优化 ："></a>13. 优化 ：</h4><p>如果一个抽屉包含2种或以上不同类型选项，最好创建缓存，让滑动更流畅。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">new</span> RecyclerViewCacheUtil&lt;IDrawerItem&gt;()</span><br><span class="line">    .withCacheSize(<span class="number">2</span>)</span><br><span class="line">    .apply(result.getRecyclerView(), result.getDrawerItems());</span><br></pre></td></tr></table></figure>
+      
+    </div>
+
+    <div>
+      
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/03/10/自定义城市选择控件CitysPickView/" rel="next" title="自定义城市选择控件CitysPickView+使用Rxjava改进">
+                <i class="fa fa-chevron-left"></i> 自定义城市选择控件CitysPickView+使用Rxjava改进
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2016/03/11/灵活易用的侧滑控件MaterialDrawer/"
+           data-title="灵活易用的侧滑控件MaterialDrawer" data-url="http://yoursite.com/2016/03/11/灵活易用的侧滑控件MaterialDrawer/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="http://7xrq6l.com1.z0.glb.clouddn.com/avatar.jpg"
+               alt="Danding1207" />
+          <p class="site-author-name" itemprop="name">Danding1207</p>
+          <p class="site-description motion-element" itemprop="description"></p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">3</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+          
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">2</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/danding1207" target="_blank">
+                  
+                    <i class="fa fa-globe"></i> github
+                  
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc-indicator-top post-toc-indicator">
+            <i class="fa fa-angle-double-up"></i>
+          </div>
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-在android-studio中自己应用-module-的gradle-添加下面代码："><span class="nav-number">1.</span> <span class="nav-text">1. 在android studio中自己应用 module 的gradle 添加下面代码：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-最简单的添加抽屉的代码是："><span class="nav-number">2.</span> <span class="nav-text">2. 最简单的添加抽屉的代码是：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-创建抽屉头："><span class="nav-number">3.</span> <span class="nav-text">3. 创建抽屉头：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-创建抽屉："><span class="nav-number">4.</span> <span class="nav-text">4. 创建抽屉：</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-保持状态："><span class="nav-number">4.1.</span> <span class="nav-text">1. 保持状态：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-关于StatusBar，ActionBar和Toolbar："><span class="nav-number">4.2.</span> <span class="nav-text">2. 关于StatusBar，ActionBar和Toolbar：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-显示Badge："><span class="nav-number">4.3.</span> <span class="nav-text">3. 显示Badge：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-Drawer的位置："><span class="nav-number">4.4.</span> <span class="nav-text">4. Drawer的位置：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#5-设置Listener："><span class="nav-number">4.5.</span> <span class="nav-text">5. 设置Listener：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#5-添加固定-不会滑动的-选项："><span class="nav-number">4.6.</span> <span class="nav-text">5. 添加固定(不会滑动的)选项：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#6-嵌入的Drawer-嵌入布局没有抽屉的滑动效果-："><span class="nav-number">4.7.</span> <span class="nav-text">6. 嵌入的Drawer(嵌入布局没有抽屉的滑动效果)：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#7-设置Drawer的根布局："><span class="nav-number">4.8.</span> <span class="nav-text">7. 设置Drawer的根布局：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#8-使用已有Menu文件："><span class="nav-number">4.9.</span> <span class="nav-text">8. 使用已有Menu文件：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#9-创建MiniDrawer-抽屉关闭时显示MiniDrawer-："><span class="nav-number">4.10.</span> <span class="nav-text">9. 创建MiniDrawer(抽屉关闭时显示MiniDrawer)：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#10-全屏："><span class="nav-number">4.11.</span> <span class="nav-text">10. 全屏：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#11-为fragment添加Drawer："><span class="nav-number">4.12.</span> <span class="nav-text">11. 为fragment添加Drawer：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#12-创建两步滑动打开Drawer-第一次滑动打开MiniDrawer，再滑动打开Drawer-："><span class="nav-number">4.13.</span> <span class="nav-text">12. 创建两步滑动打开Drawer(第一次滑动打开MiniDrawer，再滑动打开Drawer)：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#13-优化-："><span class="nav-number">4.14.</span> <span class="nav-text">13. 优化 ：</span></a></li></ol></li></ol></div>
+            
+          </div>
+          <div class="post-toc-indicator-bottom post-toc-indicator">
+            <i class="fa fa-angle-double-down"></i>
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2016</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Danding1207</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Muse
+  </a>
+</div>
+
+<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+
+<span id="busuanzi_container_site_uv">
+  本站访客数<span id="busuanzi_value_site_uv"></span>人次
+</span>
+
+
+
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+
+  
+
+
+
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js"></script>
+
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js"></script>
+
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=0.5.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=0.5.0"></script>
+
+
+
+  
+  
+
+  
+  
+<script type="text/javascript" src="/js/src/scrollspy.js?v=0.5.0"></script>
+
+<script type="text/javascript" id="sidebar.toc.highlight">
+  $(document).ready(function () {
+    var tocSelector = '.post-toc';
+    var $tocSelector = $(tocSelector);
+    var activeCurrentSelector = '.active-current';
+
+    $tocSelector
+      .on('activate.bs.scrollspy', function () {
+        var $currentActiveElement = $(tocSelector + ' .active').last();
+
+        removeCurrentActiveClass();
+        $currentActiveElement.addClass('active-current');
+
+        $tocSelector[0].scrollTop = $currentActiveElement.position().top;
+      })
+      .on('clear.bs.scrollspy', function () {
+        removeCurrentActiveClass();
+      });
+
+    function removeCurrentActiveClass () {
+      $(tocSelector + ' ' + activeCurrentSelector)
+        .removeClass(activeCurrentSelector.substring(1));
+    }
+
+    function processTOC () {
+      getTOCMaxHeight();
+      toggleTOCOverflowIndicators();
+    }
+
+    function getTOCMaxHeight () {
+      var height = $('.sidebar').height() -
+                   $tocSelector.position().top -
+                   $('.post-toc-indicator-bottom').height();
+
+      $tocSelector.css('height', height);
+
+      return height;
+    }
+
+    function toggleTOCOverflowIndicators () {
+      tocOverflowIndicator(
+        '.post-toc-indicator-top',
+        $tocSelector.scrollTop() > 0 ? 'show' : 'hide'
+      );
+
+      tocOverflowIndicator(
+        '.post-toc-indicator-bottom',
+        $tocSelector.scrollTop() >= $tocSelector.find('ol').height() - $tocSelector.height() ? 'hide' : 'show'
+      )
+    }
+
+    $(document).on('sidebar.motion.complete', function () {
+      processTOC();
+    });
+
+    $('body').scrollspy({ target: tocSelector });
+    $(window).on('resize', function () {
+      if ( $('.sidebar').hasClass('sidebar-active') ) {
+        processTOC();
+      }
+    });
+
+    onScroll($tocSelector);
+
+    function onScroll (element) {
+      element.on('mousewheel DOMMouseScroll', function (event) {
+          var oe = event.originalEvent;
+          var delta = oe.wheelDelta || -oe.detail;
+
+          this.scrollTop += ( delta < 0 ? 1 : -1 ) * 30;
+          event.preventDefault();
+
+          toggleTOCOverflowIndicators();
+      });
+    }
+
+    function tocOverflowIndicator (indicator, action) {
+      var $indicator = $(indicator);
+      var opacity = action === 'show' ? 1 : 0;
+      $indicator.velocity ?
+        $indicator.velocity('stop').velocity({
+          opacity: opacity
+        }, { duration: 100 }) :
+        $indicator.stop().animate({
+          opacity: opacity
+        }, 100);
+    }
+
+  });
+</script>
+
+<script type="text/javascript" id="sidebar.nav">
+  $(document).ready(function () {
+    var html = $('html');
+    var TAB_ANIMATE_DURATION = 200;
+    var hasVelocity = $.isFunction(html.velocity);
+
+    $('.sidebar-nav li').on('click', function () {
+      var item = $(this);
+      var activeTabClassName = 'sidebar-nav-active';
+      var activePanelClassName = 'sidebar-panel-active';
+      if (item.hasClass(activeTabClassName)) {
+        return;
+      }
+
+      var currentTarget = $('.' + activePanelClassName);
+      var target = $('.' + item.data('target'));
+
+      hasVelocity ?
+        currentTarget.velocity('transition.slideUpOut', TAB_ANIMATE_DURATION, function () {
+          target
+            .velocity('stop')
+            .velocity('transition.slideDownIn', TAB_ANIMATE_DURATION)
+            .addClass(activePanelClassName);
+        }) :
+        currentTarget.animate({ opacity: 0 }, TAB_ANIMATE_DURATION, function () {
+          currentTarget.hide();
+          target
+            .stop()
+            .css({'opacity': 0, 'display': 'block'})
+            .animate({ opacity: 1 }, TAB_ANIMATE_DURATION, function () {
+              currentTarget.removeClass(activePanelClassName);
+              target.addClass(activePanelClassName);
+            });
+        });
+
+      item.siblings().removeClass(activeTabClassName);
+      item.addClass(activeTabClassName);
+    });
+
+    $('.post-toc a').on('click', function (e) {
+      e.preventDefault();
+      var targetSelector = NexT.utils.escapeSelector(this.getAttribute('href'));
+      var offset = $(targetSelector).offset().top;
+      hasVelocity ?
+        html.velocity('stop').velocity('scroll', {
+          offset: offset  + 'px',
+          mobileHA: false
+        }) :
+        $('html, body').stop().animate({
+          scrollTop: offset
+        }, 500);
+    });
+
+    // Expand sidebar on post detail page by default, when post has a toc.
+    NexT.motion.middleWares.sidebar = function () {
+      var $tocContent = $('.post-toc-content');
+
+      if (CONFIG.scheme !== 'Pisces' && (CONFIG.sidebar.display === 'post' || CONFIG.sidebar.display === 'always')) {
+        if ($tocContent.length > 0 && $tocContent.html().trim().length > 0) {
+          NexT.utils.displaySidebar();
+        }
+      }
+    };
+  });
+</script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=0.5.0"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"danding1207"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+  
+
+
+
+
+
+  
+  
+  
+
+  
+
+
+</body>
+</html>
